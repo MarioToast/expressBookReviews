@@ -31,27 +31,75 @@ public_users.post("/register", (req,res) => {
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
-  res.send(JSON.stringify(books, null, 4));
+    let firstTime = new Date();
+    let secondTime = new Date();
+    let bookPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(secondTime = new Date())
+          },7000)
+    });
+    bookPromise.then(() =>
+    {
+        res.send(`Begun searching for book archive at ${firstTime}.
+        Retrieved at ${secondTime}.
+        ` + JSON.stringify(books, null, 4))
+    });
 });
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
     let isbn = req.params.isbn;
-    res.send(books[isbn]);
+    let firstTime = new Date();
+    let secondTime = new Date();
+    let bookPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(secondTime = new Date())
+          },7000)
+    });
+    bookPromise.then(() =>
+    {
+        res.send(`Begun searching for book with ISBN number ${isbn} at ${firstTime}.
+        Retrieved at ${secondTime}.
+        ` + JSON.stringify(books[isbn], null, 4))
+    });
  });
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
     const author = req.params.author;
     let booksByAuthor = Object.values(books).filter((book) => book.author.toLowerCase() === author);
-    res.send(booksByAuthor);
+    let firstTime = new Date();
+    let secondTime = new Date();
+    let bookPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(secondTime = new Date())
+          },7000)
+    });
+    bookPromise.then(() =>
+    {
+        res.send(`Begun searching for books with author ${author} at ${firstTime}.
+        Retrieved at ${secondTime}.
+        ` + JSON.stringify(booksByAuthor, null, 4))
+    });
 });
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
     const title = req.params.title;
     let booksByTitle = Object.values(books).filter((book) => book.title.toLowerCase().replace(/\s+/g, '') === title);
-    res.send(booksByTitle);
+    let firstTime = new Date();
+    let secondTime = new Date();
+    let bookPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(secondTime = new Date())
+          },7000)
+    });
+    bookPromise.then(() =>
+    {
+        res.send(`Begun searching for books with titles that correspond to ${title} at ${firstTime}.
+        Retrieved at ${secondTime}.
+        ` + JSON.stringify(booksByTitle, null, 4))
+    });
 });
 
 //  Get book review
